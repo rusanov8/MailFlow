@@ -1,0 +1,10 @@
+<a class="nav-link active" aria-current="page" href="{% url 'main:home' %}">Главная</a> - Кнопка для главной стр.
+
+<a class="nav-link" href="#">Список рассылок</a>
+                <a class="nav-link" href="#">Отчет проведенных рассылок</a>
+                <a class="nav-link" href="#">Создание рассылки</a>
+                <a class="nav-link" href="#">Удаление рассылки</a>
+                <a class="nav-link" href="#">Создание пользователя</a>
+                <a class="nav-link" href="#">Удаление пользователя</a>
+                <a class="nav-link" href="#">Редактирование пользователя</a>
+                <a class="nav-link" href="#">Список пользователей</a>

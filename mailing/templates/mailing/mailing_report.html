@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Отчет о рассылках{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Отчет о рассылках</h2>
+    <br>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="light-text">Тема письма</th>
+                <th class="light-text">Статус рассылки</th>
+                <th class="light-text">Количество клиентов</th>
+                <th class="light-text">Время рассылки</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mailing in mailings %}
+            <tr>
+                <td class="light-text">{{ mailing.message.subject }}</td>
+                <td class="light-text">{{ mailing.get_status_display }}</td>
+                <td class="light-text">{{ mailing.clients.count }}</td>
+                <td class="light-text">{{ mailing.send_time }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

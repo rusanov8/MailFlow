@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Клиент - Mail Flow{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="display-4 mt-5">Информация о рассылке</h1>
+            <hr>
+
+            <dl class="row">
+                <dt class="col-sm-3">Время отправки:</dt>
+                <dd class="col-sm-9">{{ object.send_time }}</dd>
+
+                <dt class="col-sm-3">Периодичность:</dt>
+                <dd class="col-sm-9">{{ object.get_frequency_display }}</dd>
+
+                <dt class="col-sm-3">Статус:</dt>
+                <dd class="col-sm-9">{{ object.get_status_display }}</dd>
+
+                <dt class="col-sm-3">Сообщение:</dt>
+                <dd class="col-sm-9">{{ object.message.body }}</dd>
+
+                <dt class="col-sm-3">Клиенты:</dt>
+                <dd class="col-sm-9">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="light-text">Имя</th>
+                            <th scope="col" class="light-text">Email</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for client in object.clients.all %}
+                        <tr>
+                            <td class="light-text"> {{ client.full_name }}</td>
+                            <td class="light-text">{{ client.email }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </dd>
+                <div class="mt-4">
+                    <a href="{% url 'mailing:mailing_logs' pk=object.pk %}" class="nav-link">Просмотр Логов</a>
+                </div>
+                <div class="mt-4">
+                    <a href="{% url 'mailing:delete' pk=object.pk %}" class="btn btn-outline-danger">Удалить</a>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

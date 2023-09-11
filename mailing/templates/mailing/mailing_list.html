@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Рассылки - Mail Flow{% endblock %}
+
+{% block content %}
+<div class="col-12 md-5">
+    <h1 class="mt-5">Список рассылок</h1>
+    <br>
+    <br>
+
+    {% for object in object_list %}
+    <div class="col-md-5">
+        <div class="card mb-4 bg-secondary text-white">
+            <div class="card-body">
+                <h5 class="card-title">{{ object.message.subject }}</h5>
+            </div>
+            <div class="card-footer bg-dark">
+                <nav class="nav nav-masthead justify-content-center">
+                    <a href="{% url 'mailing:view' pk=object.pk %}" class="nav-link">Просмотр</a>
+                    <a href="{% url 'mailing:delete' pk=object.pk %}" class="nav-link">Удалить</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <nav class="nav nav-masthead justify-content-center">
+        <a href="{% url 'mailing:create' %}" class="nav-link">Добавить рассылку</a>
+        <a href="{% url 'mailing:report' %}" class="nav-link">Отчет о рассылках</a>
+    </nav>
+</div>
+
+{% endblock %}

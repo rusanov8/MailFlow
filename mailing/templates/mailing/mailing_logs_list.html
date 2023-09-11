@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h1>Логи рассылки</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col" class="light-text">Последняя оправка</th>
+        <th scope="col" class="light-text">Статус</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for log in mailing_logs %}
+    <tr>
+        <td class="light-text">{{ log.last_try }}</td>
+        <td class="light-text">{{ log.status }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2" class="light-text">Нет логов для отображения.</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<div class="mt-4">
+    <a href="{% url 'mailing:view' pk=mailing.pk %}" class="btn btn-outline-primary">Назад к рассылке</a>
+</div>
+{% endblock %}

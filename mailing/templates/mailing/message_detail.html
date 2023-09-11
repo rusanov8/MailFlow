@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Сообщение</h2>
+<p><strong>Тема письма:</strong> {{ message.subject }}</p>
+<p><strong>Тело письма:</strong></p>
+<p>{{ message.body }}</p>
+{% endblock %}

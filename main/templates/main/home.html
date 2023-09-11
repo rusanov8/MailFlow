@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Домашняя страница - Mail Flow{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <h1 class="display-4 mt-5">Добро пожаловать в Mail Flow</h1>
+            <p class="lead">Управляйте вашими рассылками и пользователями с легкостью.</p>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link" href="{% url 'mailing:list' %}">Рассылки</a>
+                <a class="nav-link" href="{% url 'clients:list' %}">Пользователи</a>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
