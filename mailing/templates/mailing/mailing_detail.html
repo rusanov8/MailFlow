@@ -1,14 +1,15 @@
 {% extends 'main/base.html' %}
 
-{% block title %}Клиент - Mail Flow{% endblock %}
+{% block title %}Информация о рассылке - Mail Flow{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h1 class="display-4 mt-5">Информация о рассылке</h1>
-            <hr>
-
+            <h1 class="display-4 mt-5">Детали рассылки</h1>
+            <br>
+            <br>
+            <br>
             <dl class="row">
                 <dt class="col-sm-3">Время отправки:</dt>
                 <dd class="col-sm-9">{{ object.send_time }}</dd>
@@ -16,11 +17,21 @@
                 <dt class="col-sm-3">Периодичность:</dt>
                 <dd class="col-sm-9">{{ object.get_frequency_display }}</dd>
 
-                <dt class="col-sm-3">Статус:</dt>
-                <dd class="col-sm-9">{{ object.get_status_display }}</dd>
-
                 <dt class="col-sm-3">Сообщение:</dt>
                 <dd class="col-sm-9">{{ object.message.body }}</dd>
+
+                <dt class="col-sm-3">Статус:</dt>
+                <dd class="col-sm-9">
+                    {% if object.status == 'started' %}
+                    <span class="text-success">Рассылка активирована</span>
+                    {% elif object.status == 'done' %}
+                    <span class="text-danger">Рассылка остановлена</span>
+                    {% else %}
+                    <span class="text-muted">Рассылка не активирована</span>
+                    {% endif %}
+
+
+                </dd>
 
                 <dt class="col-sm-3">Клиенты:</dt>
                 <dd class="col-sm-9">
@@ -41,13 +52,35 @@
                         </tbody>
                     </table>
                 </dd>
-                <div class="mt-4">
-                    <a href="{% url 'mailing:mailing_logs' pk=object.pk %}" class="nav-link">Просмотр Логов</a>
-                </div>
-                <div class="mt-4">
-                    <a href="{% url 'mailing:delete' pk=object.pk %}" class="btn btn-outline-danger">Удалить</a>
-                </div>
+            </dl>
+
+
+            <div class="mt-4">
+                {% if object.status == 'created' %}
+                <a href="{% url 'mailing:toggle_mailing_status' pk=object.pk action='start' %}"
+                   class="btn btn-outline-success">Запустить
+                    рассылку</a>
+                {% elif object.status == 'done' %}
+                <a href="{% url 'mailing:toggle_mailing_status' pk=object.pk action='start' %}" class="btn btn-outline-success">Запустить
+                    рассылку</a>
+                {% elif object.status == 'started' %}
+                <a href="{% url 'mailing:toggle_mailing_status' pk=object.pk action='stop' %}" class="btn btn-outline-danger">Остановить
+                    рассылку</a>
+                {% endif %}
+            </div>
+            <br>
+            <br>
+            {% if not user.is_staff %}
+            <nav class="nav nav-masthead justify-content-center">
+
+                <a class="nav-link" href="{% url 'mailing:mailing_logs' pk=object.pk %}">Просмотр Логов</a>
+
+
+                <a class="nav-link" href="{% url 'mailing:edit_mailing' pk=object.pk %}">Редактировать</a>
+
+                <a class="nav-link" href="{% url 'mailing:delete' pk=object.pk %}">Удалить</a>
+            </nav>
+            {% endif %}
         </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

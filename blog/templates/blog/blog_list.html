@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Блог{% endblock %}
+
+{% block content %}
+ <nav class="nav nav-masthead justify-content-center">
+<div class="container">
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-md-4">
+            <div class="card mb-4 bg-dark text-white h-80">
+                <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }} style="width: 300px; height: 200px;">
+                <div class="card-body">
+                    <h6 class="card-title">{{ article.title }}</h6>
+                    <a class="nav-link" href="{% url 'blog:view' pk=article.pk %}">Читать</a>
+                    <small class="text-muted">Просмотры: {{ article.views_count }}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    </nav>
+{% endblock %}

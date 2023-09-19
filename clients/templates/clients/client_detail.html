@@ -6,24 +6,30 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <h1 class="display-4 mt-5">Информация о клиенте</h1>
+            <h1 class="display-4 mt-5">Подробнее о клиенте</h1>
             <hr>
+            <br>
+
 
             <dl class="row">
                 <dt class="col-sm-3">ФИО:</dt>
-                <dd class="col-sm-9">{{ object.full_name }}</dd>
+                <dd class="col-sm-9" style="margin-bottom: 20px;">{{ object.full_name }}</dd>
 
                 <dt class="col-sm-3">Email:</dt>
-                <dd class="col-sm-9">{{ object.email }}</dd>
+                <dd class="col-sm-9" style="margin-bottom: 20px;">{{ object.email }}</dd>
 
                 <dt class="col-sm-3">Комментарий:</dt>
-                <dd class="col-sm-9">{{ object.comment }}</dd>
+                <dd class="col-sm-9" style="margin-bottom: 20px;">{{ object.comment }}</dd>
             </dl>
+           <br>
+            <hr>
 
-            <div class="mt-4">
-                <a href="{% url 'clients:edit' pk=object.pk %}" class="btn btn-primary">Редактировать</a>
-                <a href="{% url 'clients:delete' pk=object.pk %}" class="btn btn-outline-danger">Удалить</a>
-            </div>
+            <br>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link" href="{% url 'clients:edit' pk=object.pk %}">Редактировать</a>
+                <a class="nav-link" href="{% url 'clients:delete' pk=object.pk %}">Удалить</a>
+
+            </nav>
         </div>
     </div>
 </div>

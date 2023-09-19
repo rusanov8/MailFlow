@@ -1,5 +1,6 @@
 from django.db import models
 from clients.models import Client
+from users.models import User
 
 
 class Message(models.Model):
@@ -44,13 +45,16 @@ class Mailing(models.Model):
     end_time = models.DateTimeField(verbose_name='Время окончания рассылки', null=True, blank=True)
     frequency = models.CharField(max_length=20, choices=PERIODS, verbose_name='Периодичность')
     status = models.CharField(max_length=20, choices=STATUSES,
-                              verbose_name='Статус рассылки', default='Создана')
+                              verbose_name='Статус рассылки', default='STATUS_CREATED')
 
     # Связь с клиентами (ManyToMany)
     clients = models.ManyToManyField(Client, verbose_name='Клиенты')
 
     # Связь с сообщением (ForeignKey)
     message = models.ForeignKey(Message, on_delete=models.CASCADE, verbose_name='Сообщение')
+
+    # Связь с пользователем
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', default=None)
 
     def __str__(self):
         return f'Рассылка от {self.send_time}'
@@ -63,6 +67,7 @@ class Mailing(models.Model):
 
 class MailingLog(models.Model):
     """Модель для хранения логов рассылок"""
+
     STATUS_OK = 'ok'
     STATUS_FAILED = 'failed'
     STATUSES = (

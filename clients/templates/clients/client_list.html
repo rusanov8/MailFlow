@@ -3,33 +3,28 @@
 {% block title %}Список клиентов - Mail Flow{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h1 class="mt-5">Список клиентов</h1>
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th scope="col" class="light-text">#</th>
-                    <th scope="col" class="light-text">ФИО</th>
-                    <th scope="col" class="light-text">Действия</th>
-                </tr>
-                </thead>
+<div class="col-12 md-5">
+    <h1 class="mt-5">Клиенты</h1>
+    <hr>
+    <br>
+            <table class="table table-striped">
+
                 <tbody>
                 {% for object in object_list %}
                 <tr>
-                    <th scope="row" class="light-text">{{ object.pk }}</th>
                     <td class="light-text">{{ object.full_name }}</td>
+                    <td class="light-text">{{ object.email }}</td>
                     <td>
-                        <a href="{% url 'clients:view' pk=object.pk %}" class="btn btn-info btn-sm">Просмотр</a>
-                        <a href="{% url 'clients:edit' pk=object.pk %}" class="btn btn-primary btn-sm">Редактировать</a>
-                        <a href="{% url 'clients:delete' pk=object.pk %}" class="btn btn-outline-danger">Удалить</a>
+                        <a href="{% url 'clients:view' pk=object.pk %}" class="btn btn-outline-secondary">Подробнее</a>
                     </td>
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
-            <a href="{% url 'clients:create' %}" class="btn btn-outline-success">Добавить клиента</a>
+            <br>
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link" href="{% url 'clients:create' %}">Добавить клиента</a>
+            </nav>
         </div>
     </div>
 </div>

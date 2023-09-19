@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Email подтвержден</div>
+
+                <div class="card-body">
+                    <p>Ваш email адрес успешно подтвержден. Теперь вы можете войти в свой аккаунт.</p>
+                    <p><a href="{% url 'users:login' %}">Войти</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

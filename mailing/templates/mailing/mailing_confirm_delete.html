@@ -7,11 +7,14 @@
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <h1 class="mt-4">Подтверждение удаления рассылки</h1>
+            <hr>
+            <br>
             <p>Вы уверены, что хотите удалить рассылку сообщения "{{ object.message.subject }}"?</p>
+            <br>
             <form method="post">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Удалить</button>
-                <a href="{% url 'mailing:list' %}" class="btn btn-secondary">Отмена</a>
+                <button type="submit" class="btn btn-outline-danger">Удалить</button>
+                <a href="{% url 'mailing:list' %}" class="btn btn-outline-secondary">Отмена</a>
             </form>
         </div>
     </div>

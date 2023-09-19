@@ -1,0 +1,56 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Клиент - Mail Flow{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="display-4 mt-5">Подробнее о пользователе</h1>
+            <hr>
+            <br>
+
+            <div class="row">
+                <div class="col-12">
+                    <dl class="row">
+                        <dt class="col-sm-3">ФИО:</dt>
+                        <dd class="col-sm-9">{% if object.full_name %}{{ object.full_name }}{% else %}Не указано{% endif%}
+                        </dd>
+
+                        <dt class="col-sm-3">Email:</dt>
+                        <dd class="col-sm-9">{{ object.email }}</dd>
+
+                        <dt class="col-sm-3">Телефон:</dt>
+                        <dd class="col-sm-9">{% if object.phone %}{{ object.phone }}{% else %}Не указан{% endif %}</dd>
+
+                        <dt class="col-sm-3">Всего рассылок:</dt>
+                        <dd class="col-sm-9">{{ mailings_count }}</dd>
+
+                        <dt class="col-sm-3">Запущенных рассылок:</dt>
+                        <dd class="col-sm-9" style="white-space: nowrap;">{{ active_mailings_count }}</dd>
+
+
+                    </dl>
+                </div>
+            </div>
+            <hr>
+
+            <br>
+
+            <div class="light-text">
+                {% if object.is_active %}
+                <a class="btn btn-outline-danger"
+                   href="{% url 'users:toggle_activity' pk=object.pk %}">Заблокировать</a>
+                {% else %}
+                <p class="text-danger">Заблокирован</p>
+                <a class="btn btn-outline-success"
+                   href="{% url 'users:toggle_activity' pk=object.pk %}">Разблокировать</a>
+                {% endif %}
+            </div>
+
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock %}

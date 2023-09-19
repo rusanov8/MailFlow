@@ -3,19 +3,30 @@
 {% block title %}Домашняя страница - Mail Flow{% endblock %}
 
 {% block content %}
-<br>
-<br>
-<br>
-<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+<div class="container mt-5">
     <div class="row">
-        <div class="col-md-8 offset-md-2 text-center">
-            <h1 class="display-4 mt-5">Добро пожаловать в Mail Flow</h1>
-            <p class="lead">Управляйте вашими рассылками и пользователями с легкостью.</p>
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link" href="{% url 'mailing:list' %}">Рассылки</a>
-                <a class="nav-link" href="{% url 'clients:list' %}">Пользователи</a>
-            </nav>
+        <div class="col-md-12">
+            <h1 class="display-4 text-center">Добро пожаловать в Mail Flow</h1>
+            <p class="lead text-center">Управляйте вашими рассылками с легкостью.</p>
         </div>
     </div>
+
+    <nav class="nav nav-masthead justify-content-center">
+        <div class="row">
+            {% for article in articles %}
+            <div class="col-md-4">
+                <div class="card mb-4 bg-dark text-white h-60">
+                    <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}"
+                         style="width: 100%; height: auto;">
+                    <div class="card-body">
+                        <h6 class="card-title">{{ article.title }}</h6>
+                        <a class="nav-link" href="{% url 'blog:view' pk=article.pk %}">Читать</a>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </nav>
 </div>
 {% endblock %}

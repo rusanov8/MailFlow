@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Список пользователей{% endblock %}
+
+{% block content %}
+<div class="col-12 md-5">
+    <h1 class="mt-5">Пользователи</h1>
+    <hr>
+    <br>
+            <table class="table table-striped">
+                <tbody>
+                {% for object in object_list %}
+                {% if not object.is_superuser and not object.is_staff %}
+                <tr>
+                    <td class="text-white"> {{ object.first_name }} {{ object.last_name }}</td>
+                    <td class="text-white">{{ object.email }}</td>
+                    <td>
+                        <a href="{% url 'users:view' pk=object.pk %}" class="btn btn-outline-secondary">Подробнее</a>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

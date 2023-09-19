@@ -4,15 +4,22 @@
 
 {% block content %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <h1 class="mt-4">{% if form.instance.pk %}Редактирование клиента{% else %}Создание клиента{% endif %}</h1>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary mt-3">Сохранить</button>
-                <a href="{% url 'clients:list' %}" class="btn btn-secondary mt-3">Отмена</a>
-            </form>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <h3>{% if form.instance.pk %}Редактирование клиента{% else %}Новый клиент{% endif %}</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-outline-primary mt-3">Сохранить</button>
+                        <a href="{% url 'clients:list' %}" class="btn btn-outline-secondary mt-3">Отмена</a>
+                    </form>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

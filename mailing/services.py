@@ -5,6 +5,7 @@ import datetime
 
 
 def send_mailing(mailing_id):
+    """Отправляет рассылку"""
     try:
         mailing = Mailing.objects.get(pk=mailing_id)
 
@@ -29,12 +30,13 @@ def send_mailing(mailing_id):
 
 
 def schedule_mailing():
+    """Отправляет рассылку по расписанию"""
 
     now = datetime.datetime.now()
     for mailing in Mailing.objects.filter(status=Mailing.STATUS_STARTED):  # берем все рассылки со статусом 'запущена'
         if (now > mailing.send_time) and (now < mailing.end_time):
 
-            mailing_log =  MailingLog.objects.filter(mailing=mailing)
+            mailing_log = MailingLog.objects.filter(mailing=mailing)
 
             if mailing_log.exists():
                 last_try_date = mailing_log.order_by('send_time').first().send_time

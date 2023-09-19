@@ -8,25 +8,52 @@
     <br>
     <br>
 
-    {% for object in object_list %}
-    <div class="col-md-5">
-        <div class="card mb-4 bg-secondary text-white">
-            <div class="card-body">
-                <h5 class="card-title">{{ object.message.subject }}</h5>
-            </div>
-            <div class="card-footer bg-dark">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="text-white">Сообщение</th>
+            {% if user.is_staff %}
+            <th class="text-white">Пользователь</th>
+            {% endif %}
+            <th class="text-white">Статус</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in object_list %}
+        <tr>
+            <td class="text-white">
                 <nav class="nav nav-masthead justify-content-center">
-                    <a href="{% url 'mailing:view' pk=object.pk %}" class="nav-link">Просмотр</a>
-                    <a href="{% url 'mailing:delete' pk=object.pk %}" class="nav-link">Удалить</a>
+                    <a href="{% url 'mailing:view' pk=object.pk %}" class="nav-link">{{ object.message.subject }}</a>
                 </nav>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-    <nav class="nav nav-masthead justify-content-center">
-        <a href="{% url 'mailing:create' %}" class="nav-link">Добавить рассылку</a>
-        <a href="{% url 'mailing:report' %}" class="nav-link">Отчет о рассылках</a>
-    </nav>
-</div>
+            </td>
+            {% if user.is_staff %}
 
+            <td class="text-white">
+                <nav class="nav nav-masthead justify-content-center">
+                    <a href="{% url 'users:view' pk=object.user.pk %}" class="nav-link">{{ object.user.email }}</a>
+                </nav>
+            </td>
+            {% endif %}
+            <td class="text-white">
+                {% if object.status == 'done' %}
+                Завершена
+                {% elif object.status == 'started' %}
+                Запущена
+                {% elif object.status == 'created' %}
+                Создана
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <br>
+</div>
+{% if not user.is_staff %}
+<nav class="nav nav-masthead justify-content-center">
+    <a href="{% url 'mailing:create' %}" class="nav-link">Добавить рассылку</a>
+    <a href="{% url 'mailing:report' %}" class="nav-link">Отчет о рассылках</a>
+</nav>
+{% endif %}
 {% endblock %}
