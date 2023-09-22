@@ -4,12 +4,14 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card bg-dark text-white">
                 <div class="card-header">Email подтвержден</div>
 
                 <div class="card-body">
                     <p>Ваш email адрес успешно подтвержден. Теперь вы можете войти в свой аккаунт.</p>
-                    <p><a href="{% url 'users:login' %}">Войти</a></p>
+                    <nav class="nav nav-masthead justify-content-center">
+                        <a class="nav-link" href="{% url 'users:login' %}">Войти</a>
+                    </nav>
                 </div>
             </div>
         </div>
